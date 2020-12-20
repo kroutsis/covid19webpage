@@ -1,0 +1,84 @@
+body {
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    border: 3px solid black;
+}
+
+#map {
+	width: 100%;
+    border-top: double black;
+    overflow: hidden;
+}
+
+#maptiptext{
+    text-align: center;
+}
+
+#topwrap {
+	width: 100%;
+    border-top: double black;
+    overflow: hidden;
+}
+#topwrapr {
+    width: 400px;
+    float: left;
+}
+#most_patient_graph {
+    margin-top: 45px;
+	width: 496px;
+    float: left;
+}
+
+#array_info {
+    width: 100%;
+    border-top: double black;
+    overflow-y: scroll;
+    height:400px;
+    display:block;
+}
+
+#table_info {
+    text-align: left;
+    position: relative;
+
+}
+#table_info th {
+    text-align: left;
+    background: white;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
+#midwrap {
+    width: 100%;
+    border-top: double black;
+    overflow: hidden;
+}
+#country_info_graph {
+	float: left;
+}
+
+#country_compartion_bar_graph {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#midwrap2 {
+    width: 100%;
+    border-top: double black;
+}
+
+#botwrap {
+	width: 100%;
+    border-top: double black;
+    overflow: hidden;
+}
+#libimage {
+    width: 100%;
+    height: auto;
+}

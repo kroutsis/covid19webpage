@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+	{% load static %}
+    
+    <title>Covid-19 Stats</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="{% static 'virus.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+{% block content %}
+
+    <h1>Covid-19 Stats</h1>
+	
+	<div id="map">
+        {{ map|safe }}
+        <div id="maptiptext">Select a Country/Region on map to show more info</div>
+	</div>
+	
+	<div id="topwrap">
+	    <div id="topwrapr">
+        <br>
+	        <div id="info">
+	            {% for i in info %}
+                    <li>{{ i|safe }}</li>
+                {% endfor %}
+	        </div>
+	        <img id="pie" src="data:image/png;base64,{{pie}}" width=400 height=auto />
+	    </div>
+	    <img id="most_patient_graph" src="data:image/png;base64,{{most_p_graph}}" width=450 height=auto />
+	</div>
+    
+    <div id ="array_info">
+        {{ array_info|safe }}
+    </div>
+    
+	<div id="midwrap">
+        <br>
+        <form id="select_form" action="{% url 'home' %}#select_form" method='POST'>{% csrf_token %}
+            <li>Select a country/region to see more info:
+		    <select id="country_list" name="query">
+				{% for c in countries %}
+                    <option value="{{c}}">{{c}}</option>
+                {% endfor %}
+			</select>
+            <button type="submit" name="btnform1">Submit</button></li>
+        </form><br>
+        <img id="country_info_graph" src="data:image/png;base64,{{c_info_output}}" alt="Select a country/region from above to view graph" width=450 height=auto />
+        <img id="two_countries_compartion_graph" src="data:image/png;base64,{{c_to_c_compartion_output}}" alt="Submit two countries/regions from above to view graph" width=450 height=auto />
+    </div>
+    
+    <div id="midwrap2">
+        <img id="country_compartion_bar_graph" src="data:image/png;base64,{{c_compartion_output}}" alt="Select a country/region from above to view graph" width=600 height=auto />
+    </div>
+    <br>
+    <div id="sourse">
+        <li>
+            Data Source: 
+            <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">github.com/CSSEGISandData/COVID-19</a><br>
+        </li>
+        <li>
+            Raw Data Used: 
+            <a href="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv" target="_blank">Confirmed Dataset</a>
+            <a href="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv" target="_blank">Recovered Dataset</a>
+            <a href="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv" target="_blank">Deaths Dataset</a>
+        </li>
+        <li>
+            Tech Used: 
+            <a href="https://www.python.org/downloads/" target="_blank">Python</a>
+            <a href="https://numpy.org/" target="_blank">NumPy</a>
+            <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>
+            <a href="https://matplotlib.org/" target="_blank">Matplotlib</a>
+            <a href="https://www.djangoproject.com/" target="_blank">Django</a>
+            <a href="https://pypi.org/project/folium/" target="_blank">Folium</a>
+            <a href="https://pypi.org/project/Pillow/" target="_blank">Pillow</a>
+            <a href="https://git-scm.com/" target="_blank">Git</a>
+            <a href="https://www.heroku.com/" target="_blank">Heroku</a>
+        </li>
+        <li>
+            Contact Me:
+            krunknownmaniak95@gmail.com
+        </li>
+    </div>
+    <br>
+    <div id="botwrap">
+        <img id="libimage" src="{% static 'botlib.png' %}" alt="Technologies Used">
+    </div>
+    
+{% endblock %}
+
+</body>
+
+</html>
