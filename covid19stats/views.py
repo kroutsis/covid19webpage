@@ -11,8 +11,14 @@ from matplotlib import pylab as plt
 import PIL, PIL.Image, io, base64
 from io import BytesIO
 
-labels = []
-two_c_compartion = []
+#---------pre-chosen country input------------
+labels = ["Greece", "Italy"]
+two_c_compartion = ["Greece", "Italy"]
+#---------------------------------------------
+
+#labels = []
+#two_c_compartion = []
+
 	
 def home_page(request, *args, **kwargs):
 
@@ -57,6 +63,13 @@ def home_page(request, *args, **kwargs):
         'map':m._repr_html_(),
         'array_info': array_info.to_html(table_id='table_info')
         }
+
+    #---------pre-chosen country input------------
+    c_info_result = country_info(dfc, dfd, dfr, date_columns, "Greece")
+    c_to_c_compartion_result = country_to_country_compartion(dfc, date_columns, ["Greece", "Italy"])
+    c_compartion_info = covid_cases_compartion(dfc, dfr, dfd, last_update_date, ["Greece", "Italy"])
+    context.update({'c_info_output': c_info_result, 'c_to_c_compartion_output': c_to_c_compartion_result, 'c_compartion_output': c_compartion_info})
+    #---------------------------------------------
     
     if request.method == 'POST' and 'btnform1' in request.POST:
         get_output = str(request.POST.get('query'))
@@ -275,7 +288,7 @@ def country_info(dfc, dfd, dfr, date_columns, get_output):
     plt.plot(dates_with_desease,num_of_deaths, label='Deceased')
     
     plt.title('Covid-19 '+ country_name +' cases')
-    plt.xticks(dates_with_desease[1::12], rotation=50)
+    plt.xticks(dates_with_desease[1::15], rotation=50)
 
     offset_text = plt.gca().get_ylim()
     plt.ylabel('Number of Patients' + set_label(offset_text[1]))
@@ -325,17 +338,17 @@ def country_to_country_compartion(dfc, date_columns, two_c_compartion):
     ax1 = plt.subplot(212)
     ax1.plot(dates_with_desease, num_of_patients_c2, label=country_name_2, color='blue')
     ax1.plot(dates_with_desease, num_of_patients_c1, label=country_name_1, color='red')
-    plt.xticks(dates_with_desease[1::15], rotation=35)
+    plt.xticks(dates_with_desease[1::16], rotation=45)
     plt.title('Covid-19 cases compartion')
         
     ax2 = plt.subplot(221)
     ax2.plot(dates_with_desease, num_of_patients_c1, label=country_name_1, color='red')
-    plt.xticks(dates_with_desease[1::30], rotation=45)
+    plt.xticks(dates_with_desease[1::34], rotation=45)
     plt.title(country_name_1)
     
     ax3 = plt.subplot(222)
     ax3.plot(dates_with_desease, num_of_patients_c2, label=country_name_2, color='blue')
-    plt.xticks(dates_with_desease[1::30], rotation=45)
+    plt.xticks(dates_with_desease[1::34], rotation=45)
     plt.title(country_name_2)
     
     offset_text1 = ax1.get_yticks()
